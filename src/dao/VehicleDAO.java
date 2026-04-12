@@ -82,4 +82,36 @@ public class VehicleDAO {
 
         return table;
     }
+
+    public String listEnabledVehicles() {
+
+        PreparedStatement stmt;
+        String sql = "SELECT * FROM vehicles WHERE available = true";
+        String rows;
+        String table = "";
+
+        try (Connection conn = ConnectionFactory.getConnection()) {
+
+            stmt = conn.prepareStatement(sql);
+            ResultSet result = stmt.executeQuery();
+
+            while (result.next()) {
+                Long id = result.getLong("id");
+                String plate = result.getString("plate");
+                String brand = result.getString("brand");
+                String model = result.getString("model");
+                int year = result.getInt("year");
+                double dailyRate = result.getDouble("daily_rate");
+
+                rows = id + " | " + plate + " | " + brand + " | " +
+                        model + " | " + year + " | " + dailyRate +  " | " + "\n";
+                table += rows;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return table;
+    }
  }
