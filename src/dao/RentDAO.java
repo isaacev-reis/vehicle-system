@@ -42,6 +42,11 @@ public class RentDAO {
             stmt.setLong(1, id);
             stmt.executeUpdate();
 
+            stmt = conn.prepareStatement("UPDATE rent SET end_date = ? WHERE vehicle_id = ?");
+            stmt.setDate(1, Date.valueOf(LocalDate.now()));
+            stmt.setLong(2, id);
+            stmt.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -64,7 +69,16 @@ public class RentDAO {
                 Long vehicleId = result.getLong("vehicle_id");
                 String clientName = result.getString("client_name");
                 LocalDate startDate = result.getDate("start_date").toLocalDate();
-                LocalDate endDate = result.getDate("end_date").toLocalDate();
+
+                Date sqlDate = result.getDate("end_date");
+                String endDate;
+
+                if (sqlDate != null) {
+                    endDate = (sqlDate.toLocalDate()).toString();
+                } else {
+                    endDate = "The rent isn't finished";
+                }
+
                 boolean finished = result.getBoolean("finished");
 
                 rows = id + " | " + vehicleId + " | " + clientName + " | " +
