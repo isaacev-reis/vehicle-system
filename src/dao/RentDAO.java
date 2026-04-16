@@ -23,7 +23,7 @@ public class RentDAO {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error renting vehicle");
+            throw new RuntimeException("Error renting vehicle", e);
         }
     }
 
@@ -46,7 +46,7 @@ public class RentDAO {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error returning vehicle");
+            throw new RuntimeException("Error returning vehicle", e);
         }
     }
 
@@ -85,7 +85,7 @@ public class RentDAO {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error listing rents");
+            throw new RuntimeException("Error listing rents", e);
         }
 
         return table;
