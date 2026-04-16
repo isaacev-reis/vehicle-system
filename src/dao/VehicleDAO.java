@@ -114,4 +114,29 @@ public class VehicleDAO {
 
         return table;
     }
+
+    public Vehicle findById(Long id) {
+
+        Vehicle vehicle = null;
+        String sql = "SELECT * FROM vehicles WHERE id = ?;";
+
+        try (Connection conn = ConnectionFactory.getConnection()) {
+
+            PreparedStatement stmt;
+            stmt = conn.prepareStatement(sql);
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            vehicle = new Vehicle(rs.getString("plate"), rs.getString("brand"),
+                                    rs.getString("model"), rs.getInt("year"),
+                                    rs.getDouble("daily_rate"));
+            vehicle.setId(rs.getLong("id"));
+
+        } catch (SQLException e) {
+            throw new RuntimeException("This vehicle is unexist", e);
+        }
+
+        return vehicle;
+    }
  }

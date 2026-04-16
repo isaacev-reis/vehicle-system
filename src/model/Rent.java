@@ -10,11 +10,10 @@ public class Rent {
     private LocalDate endDate;
     private boolean finished;
 
-    public Rent(Vehicle vehicle, String clientName, LocalDate startDate, LocalDate endDate) {
+    public Rent(Vehicle vehicle, String clientName, LocalDate startDate) {
         this.vehicle = vehicle;
         this.clientName = clientName;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.finished = false;
     }
 

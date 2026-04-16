@@ -36,7 +36,7 @@ public class RentDAO {
             stmt.setLong(1, id);
             stmt.executeUpdate();
 
-            stmt = conn.prepareStatement("UPDATE rent SET finished = true WHERE vehicle_id = ?");
+            stmt = conn.prepareStatement("UPDATE rent SET finished = true WHERE vehicle_id = ? AND finished = false");
             stmt.setLong(1, id);
             stmt.executeUpdate();
 

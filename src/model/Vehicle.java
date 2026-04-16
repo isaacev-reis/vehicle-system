@@ -47,4 +47,21 @@ public class Vehicle {
     public boolean isAvailable() {
         return available;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "id=" + id +
+                ", plate='" + plate + '\'' +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", year=" + year +
+                ", dailyRate=" + dailyRate +
+                ", available=" + available +
+                '}';
+    }
 }
